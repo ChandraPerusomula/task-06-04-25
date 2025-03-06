@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dynamic Image Buttons</title>
+<style>
+  .image-container {
+    display: none; 
+    margin-top: 50px;
+  }
+  .button-container {
+    margin-bottom: 20px;
+    
+  }
+</style>
+</head>
+<body>
+
+<div id="buttonContainer" class="button-container"></div>
+<div id="imageContainers"></div>
+
+<script>
+const images = {
+  "Solo  Leveing": "https://th.bing.com/th/id/OIP.yuGT0PcUO8wH-UDG-CE2lwHaM9?w=186&h=326&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+  "Gojo": "https://i.pinimg.com/736x/c2/a0/f7/c2a0f7164a5ce072cc0e20df1959057d.jpg",
+  "Suguna": "https://th.bing.com/th/id/OIP.cajm65galgrcDoNHjSRHqwHaHa?rs=1&pid=ImgDetMain",
+  "Blacl Cover": "https://th.bing.com/th/id/OIP.fmSyNSnD4B1C0Ug2m7Nd-gHaHa?rs=1&pid=ImgDetMain"
+};
+
+const buttonContainer = document.getElementById("buttonContainer");
+const imageContainers = document.getElementById("imageContainers");
+
+
+for (const imageName in images) {
+  const button = document.createElement("button");
+  button.textContent = imageName;
+
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "image-container";
+  imageContainer.id = `image-${imageName.toLowerCase()}`; 
+
+  const image = document.createElement("img");
+  image.src = images[imageName];
+  image.alt = imageName;
+
+  imageContainer.appendChild(image);
+  imageContainers.appendChild(imageContainer);
+  buttonContainer.appendChild(button);
+
+  
+  button.addEventListener("click", () => {
+    
+    const allImageContainers = document.querySelectorAll(".image-container");
+    allImageContainers.forEach(container => {
+      container.style.display = "none";
+    });
+
+    
+    const selectedImageContainer = document.getElementById(`image-${imageName.toLowerCase()}`);
+    if (selectedImageContainer) {
+      selectedImageContainer.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
